@@ -172,16 +172,17 @@
                      CONTACT
                 ========================= -->
 
-                <li class="nav-item">
+        
+            <li class="nav-item">
+            
+                <a href="{% url 'contact_us' %}"
+                    class="nav-link {% if request.path == '/contact_us/' or request.path == '/contact_us' %}active{% endif %}">
+                    Mail
+                </a>
+            
+            </li>
+        
 
-                    <a href="/contact_us/"
-                        class="nav-link {% if request.path == '/contact_us/' or request.path == '/contact_us' %}active{% endif %}">
-
-                    mail
-
-                    </a>
-
-                </li>
 
 
                 <!-- =========================

@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
-{% load static %}
-
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Contact | Portfolio</title>
@@ -37,7 +39,6 @@
             overflow: hidden;
         }
 
-
         /* ================================
            BACKGROUND FLOATING SHAPES
         ================================= */
@@ -47,7 +48,6 @@
             border-radius: 50%;
             filter: blur(2px);
             z-index: 0;
-
             animation-name: floating;
             animation-timing-function: ease-in-out;
             animation-iteration-count: infinite;
@@ -56,28 +56,20 @@
         .shape-one {
             width: 280px;
             height: 280px;
-
             background: #ddd6fe;
-
             top: -120px;
             left: -100px;
-
             opacity: 0.6;
-
             animation-duration: 10s;
         }
 
         .shape-two {
             width: 240px;
             height: 240px;
-
             background: #fbcfe8;
-
             bottom: -100px;
             right: -80px;
-
             opacity: 0.6;
-
             animation-duration: 12s;
             animation-delay: 1s;
         }
@@ -85,18 +77,13 @@
         .shape-three {
             width: 100px;
             height: 100px;
-
             background: #bfdbfe;
-
             top: 30%;
             right: 8%;
-
             opacity: 0.35;
-
             animation-duration: 7s;
             animation-delay: 2s;
         }
-
 
         /* ================================
            FLOATING ANIMATION
@@ -123,8 +110,8 @@
             100% {
                 transform: translate(0, 0) scale(1);
             }
-        }
 
+        }
 
         /* ================================
            MAIN CONTACT CARD
@@ -133,13 +120,9 @@
         .contact-box {
             width: 100%;
             max-width: 680px;
-
             background: rgba(255, 255, 255, 0.88);
-
             padding: 45px;
-
             border-radius: 28px;
-
             border: 1px solid rgba(255, 255, 255, 0.9);
 
             box-shadow:
@@ -147,11 +130,9 @@
                 0 5px 15px rgba(99, 102, 241, 0.05);
 
             backdrop-filter: blur(12px);
-
             position: relative;
             z-index: 2;
         }
-
 
         /* ================================
            HEADING
@@ -164,31 +145,20 @@
 
         .small-title {
             display: inline-block;
-
             padding: 7px 15px;
-
             background: #eef2ff;
-
             color: #6366f1;
-
             border-radius: 50px;
-
             font-size: 13px;
-
             font-weight: 700;
-
             letter-spacing: 1px;
-
             margin-bottom: 12px;
         }
 
         .contact-heading h1 {
             margin: 0;
-
             font-size: 38px;
-
             font-weight: 700;
-
             color: #1f2937;
         }
 
@@ -198,16 +168,11 @@
 
         .contact-heading p {
             margin: 12px auto 0;
-
             max-width: 500px;
-
             color: #6b7280;
-
             font-size: 15px;
-
             line-height: 1.7;
         }
-
 
         /* ================================
            FORM
@@ -219,13 +184,9 @@
 
         .form-group label {
             display: block;
-
             margin-bottom: 9px;
-
             color: #374151;
-
             font-size: 14px;
-
             font-weight: 600;
         }
 
@@ -235,47 +196,31 @@
 
         .input-icon {
             position: absolute;
-
             left: 16px;
             top: 50%;
-
             transform: translateY(-50%);
-
             font-size: 17px;
-
             color: #9ca3af;
-
             pointer-events: none;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-
             border: 1px solid #e5e7eb;
-
             background: #f9fafb;
-
             border-radius: 14px;
-
             padding: 15px 17px 15px 46px;
-
             font-size: 15px;
-
             color: #1f2937;
-
             outline: none;
-
             transition: all 0.3s ease;
         }
 
         .form-group textarea {
             min-height: 145px;
-
             resize: vertical;
-
             line-height: 1.6;
-
             padding: 16px;
         }
 
@@ -287,13 +232,11 @@
         .form-group input:focus,
         .form-group textarea:focus {
             background: #ffffff;
-
             border-color: #818cf8;
 
             box-shadow:
                 0 0 0 4px rgba(99, 102, 241, 0.10);
         }
-
 
         /* ================================
            MESSAGE LABEL
@@ -301,12 +244,9 @@
 
         .message-label {
             display: flex !important;
-
             align-items: center;
-
             gap: 7px;
         }
-
 
         /* ================================
            SUBMIT BUTTON
@@ -314,13 +254,9 @@
 
         .submit-btn {
             width: 100%;
-
             border: none;
-
             border-radius: 14px;
-
             padding: 16px 20px;
-
             margin-top: 5px;
 
             background: linear-gradient(135deg,
@@ -328,15 +264,10 @@
                     #7c3aed);
 
             color: white;
-
             font-size: 16px;
-
             font-weight: 700;
-
             letter-spacing: 0.3px;
-
             cursor: pointer;
-
             transition: all 0.3s ease;
 
             box-shadow:
@@ -354,21 +285,16 @@
             transform: translateY(0);
         }
 
-
         /* ================================
            BOTTOM TEXT
         ================================= */
 
         .contact-note {
             text-align: center;
-
             margin-top: 20px;
-
             color: #9ca3af;
-
             font-size: 13px;
         }
-
 
         /* ================================
            RESPONSIVE
@@ -382,7 +308,6 @@
 
             .contact-box {
                 padding: 30px 22px;
-
                 border-radius: 22px;
             }
 
@@ -409,9 +334,8 @@
             }
         }
 
-
         /* ================================
-           REDUCE MOTION FOR ACCESSIBILITY
+           REDUCE MOTION
         ================================= */
 
         @media (prefers-reduced-motion: reduce) {
@@ -423,8 +347,10 @@
             .submit-btn {
                 transition: none;
             }
+
         }
     </style>
+
 </head>
 
 
@@ -439,13 +365,10 @@
 
     <section class="contact-section">
 
-
         <!-- Animated Background Shapes -->
 
         <div class="shape shape-one"></div>
-
         <div class="shape shape-two"></div>
-
         <div class="shape shape-three"></div>
 
 
@@ -476,7 +399,7 @@
 
             <!-- Contact Form -->
 
-            <form method="POST" action="/contact_us/">
+            <form method="POST" action="{% url 'contact_us' %}">
 
                 {% csrf_token %}
 
