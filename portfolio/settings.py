@@ -4,6 +4,7 @@ Django settings for portfolio project.
 
 from pathlib import Path
 import os
+
 from dotenv import load_dotenv
 
 
@@ -22,7 +23,7 @@ load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
-    "django-insecure-change-this-secret-key"
+    "django-insecure-change-this-secret-key",
 )
 
 DEBUG = False
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -175,6 +177,15 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 
 # ============================================================
 # MEDIA FILES
@@ -190,13 +201,13 @@ MEDIA_ROOT = BASE_DIR / "media"
 # ============================================================
 
 RESEND_API_KEY = os.environ.get(
-    "RESEND_API_KEY",""
-   
+    "RESEND_API_KEY",
+    "",
 )
 
 CONTACT_EMAIL = os.environ.get(
     "CONTACT_EMAIL",
-    "tiwarisrijal22@gmail.com"
+    "tiwarisrijal22@gmail.com",
 )
 
 
