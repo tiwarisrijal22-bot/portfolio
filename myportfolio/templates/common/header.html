@@ -1,0 +1,209 @@
+<style>
+    /* =========================
+       HEADER / NAVBAR
+    ========================= */
+
+    .custom-navbar {
+        background: linear-gradient(90deg,
+                #4F46E5 0%,
+                #6D4BE8 45%,
+                #8B5CF6 75%,
+                #A855F7 100%);
+
+        padding: 8px 0;
+
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.20);
+    }
+
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .custom-navbar .navbar-brand {
+        color: #ffffff !important;
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+
+    /* =========================
+       NAVIGATION LINKS
+    ========================= */
+
+    .custom-navbar .nav-link {
+        color: #ffffff !important;
+        font-size: 15px;
+        font-weight: 500;
+
+        padding: 8px 14px !important;
+        margin: 0 3px;
+
+        border-radius: 6px;
+
+        transition: 0.25s ease;
+    }
+
+
+    /* =========================
+       HOVER
+    ========================= */
+
+    .custom-navbar .nav-link:hover {
+        background: rgba(255, 255, 255, 0.16);
+        color: #ffffff !important;
+    }
+
+
+    /* =========================
+       ACTIVE PAGE
+    ========================= */
+
+    .custom-navbar .nav-link.active {
+        background: rgba(255, 255, 255, 0.18);
+        color: #ffffff !important;
+    }
+
+
+    /* =========================
+       MOBILE TOGGLE
+    ========================= */
+
+    .custom-navbar .navbar-toggler {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 5px 8px;
+    }
+
+    .custom-navbar .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    @media (max-width: 991px) {
+
+        .custom-navbar .navbar-nav {
+            padding-top: 10px;
+        }
+
+        .custom-navbar .nav-link {
+            margin: 3px 0;
+            padding: 9px 12px !important;
+        }
+
+    }
+</style>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+
+    <div class="container">
+
+
+        <!-- =========================
+             LOGO
+        ========================= -->
+
+        <a class="navbar-brand" href="/">
+            Portfolio
+        </a>
+
+
+        <!-- =========================
+             MOBILE TOGGLE
+        ========================= -->
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <!-- =========================
+             MENU
+        ========================= -->
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <ul class="navbar-nav mx-auto">
+
+
+                <!-- =========================
+                     HOME
+                ========================= -->
+
+                <li class="nav-item">
+
+                    <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <!-- =========================
+                     ABOUT
+                ========================= -->
+
+                <li class="nav-item">
+
+                    <a href="/about_us/" class="nav-link {% if request.path == '/about_us/' %}active{% endif %}">
+
+                        About
+
+                    </a>
+
+                </li>
+
+
+                <!-- =========================
+                     CONTACT
+                ========================= -->
+
+                <li class="nav-item">
+
+                    <a href="/contact_us/"
+                        class="nav-link {% if request.path == '/contact_us/' or request.path == '/contact_us' %}active{% endif %}">
+
+                    mail
+
+                    </a>
+
+                </li>
+
+
+                <!-- =========================
+                     CERTIFICATES
+                ========================= -->
+
+                <li class="nav-item">
+
+                    <a href="/certificate/"
+                        class="nav-link {% if request.path == '/certificate/' or request.path == '/certificate' %}active{% endif %}">
+
+                        Certificates
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | Srijal Tiwari</title>
+
+    {% include 'common/common_css.html' %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --violet: #7c3aed;
+            --dark: #172033;
+            --text: #475467;
+            --muted: #667085;
+            --light: #f6f8fc;
+            --white: #ffffff;
+            --border: #e5eaf2;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ==============================
+           ABOUT SECTION
+        ============================== */
+
+        .about-section {
+            min-height: 88vh;
+            padding: 75px 8%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 10% 20%,
+                    rgba(37, 99, 235, 0.10),
+                    transparent 28%),
+                radial-gradient(circle at 90% 80%,
+                    rgba(124, 58, 237, 0.10),
+                    transparent 30%),
+                #f7f9fd;
+        }
+
+        /* Decorative circles */
+
+        .about-section::before {
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            top: -230px;
+            right: -170px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(37, 99, 235, 0.12);
+
+            box-shadow:
+                0 0 0 50px rgba(37, 99, 235, 0.025),
+                0 0 0 100px rgba(124, 58, 237, 0.02);
+        }
+
+        .about-section::after {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            bottom: -190px;
+            left: -130px;
+
+            border-radius: 50%;
+
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        /* ==============================
+           CONTAINER
+        ============================== */
+
+        .about-container {
+            max-width: 1100px;
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns: 360px 1fr;
+
+            gap: 65px;
+
+            align-items: center;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ==============================
+           PROFILE IMAGE
+        ============================== */
+
+        .about-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+        }
+
+        .image-frame {
+            width: 340px;
+            height: 470px;
+
+            padding: 8px;
+
+            border-radius: 28px;
+
+            background: linear-gradient(145deg,
+                    #2563eb,
+                    #7c3aed,
+                    #0ea5e9);
+
+            box-shadow:
+                0 25px 60px rgba(37, 99, 235, 0.20);
+
+            position: relative;
+
+            transform: rotate(-2deg);
+
+            transition: 0.4s ease;
+        }
+
+        .image-frame:hover {
+            transform: rotate(0deg) translateY(-8px);
+
+            box-shadow:
+                0 30px 70px rgba(37, 99, 235, 0.25);
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            border-radius: 22px;
+
+            border: 7px solid #ffffff;
+
+            background: #ffffff;
+        }
+
+        /* Decorative dot */
+
+        .image-dot {
+            position: absolute;
+
+            width: 18px;
+            height: 18px;
+
+            right: -12px;
+            bottom: 55px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+            border: 4px solid #ffffff;
+
+            box-shadow:
+                0 0 20px rgba(34, 197, 94, 0.5);
+        }
+
+        /* ==============================
+           CONTENT CARD
+        ============================== */
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.94);
+
+            padding: 45px;
+
+            border-radius: 24px;
+
+            border: 1px solid var(--border);
+
+            box-shadow:
+                0 20px 55px rgba(31, 41, 55, 0.08);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .about-content::before {
+            content: "";
+
+            position: absolute;
+
+            width: 170px;
+            height: 170px;
+
+            right: -90px;
+            top: -90px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(135deg,
+                    rgba(37, 99, 235, 0.12),
+                    rgba(124, 58, 237, 0.10));
+        }
+
+        /* ==============================
+           TAG
+        ============================== */
+
+        .about-tag {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 15px;
+
+            margin-bottom: 17px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(90deg,
+                    #eef4ff,
+                    #f3edff);
+
+            border: 1px solid #dfe6f7;
+
+            color: #315bb0;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .about-tag::before {
+            content: "";
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--blue);
+        }
+
+        /* ==============================
+           HEADING
+        ============================== */
+
+        .about-content h1 {
+            font-size: 46px;
+
+            line-height: 1.1;
+
+            color: var(--dark);
+
+            margin-bottom: 22px;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+        }
+
+        .about-content h1 span {
+            background:
+                linear-gradient(90deg,
+                    var(--blue),
+                    var(--violet));
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ==============================
+           PARAGRAPHS
+        ============================== */
+
+        .about-content p {
+            color: var(--muted);
+
+            font-size: 15px;
+
+            line-height: 1.85;
+
+            margin-bottom: 15px;
+        }
+
+        /* ==============================
+           INFORMATION
+        ============================== */
+
+        .about-info {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+            margin-top: 28px;
+        }
+
+        .info-item {
+            padding: 13px 14px;
+
+            background: #f8faff;
+
+            border: 1px solid #e2e8f2;
+
+            border-radius: 11px;
+
+            color: #667085;
+
+            font-size: 12px;
+
+            transition: 0.25s ease;
+        }
+
+        .info-item:hover {
+            background: #ffffff;
+
+            border-color: #cfdaf0;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 20px rgba(31, 41, 55, 0.06);
+        }
+
+        .info-item strong {
+            display: block;
+
+            color: #315bb0;
+
+            margin-bottom: 5px;
+
+            font-size: 12px;
+        }
+
+        /* ==============================
+           BUTTON
+        ============================== */
+
+        .about-btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 27px;
+
+            padding: 13px 23px;
+
+            background:
+                linear-gradient(135deg,
+                    var(--blue),
+                    var(--violet));
+
+            color: #ffffff;
+
+            border: none;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 10px 25px rgba(37, 99, 235, 0.20);
+
+            transition: 0.3s ease;
+        }
+
+        .about-btn:hover {
+            color: #ffffff;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 35px rgba(37, 99, 235, 0.28);
+        }
+
+        /* ==============================
+           TABLET
+        ============================== */
+
+        @media (max-width: 950px) {
+
+            .about-section {
+                padding: 65px 6%;
+            }
+
+            .about-container {
+                grid-template-columns: 300px 1fr;
+
+                gap: 40px;
+            }
+
+            .image-frame {
+                width: 290px;
+                height: 410px;
+            }
+
+            .about-content {
+                padding: 35px;
+            }
+
+            .about-content h1 {
+                font-size: 39px;
+            }
+
+            .about-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 800px) {
+
+            .about-section {
+                min-height: auto;
+
+                padding: 60px 6%;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+            }
+
+            .about-image {
+                order: 1;
+            }
+
+            .about-content {
+                order: 2;
+
+                padding: 32px;
+            }
+
+            .image-frame {
+                width: 280px;
+                height: 370px;
+            }
+
+            .about-content h1 {
+                font-size: 37px;
+            }
+        }
+
+        /* ==============================
+           SMALL MOBILE
+        ============================== */
+
+        @media (max-width: 500px) {
+
+            .about-section {
+                padding: 45px 5%;
+            }
+
+            .image-frame {
+                width: 235px;
+                height: 315px;
+
+                border-radius: 22px;
+            }
+
+            .image-frame img {
+                border-radius: 17px;
+
+                border-width: 6px;
+            }
+
+            .about-content {
+                padding: 27px 21px;
+
+                border-radius: 18px;
+            }
+
+            .about-tag {
+                font-size: 12px;
+            }
+
+            .about-content h1 {
+                font-size: 31px;
+
+                margin-bottom: 18px;
+            }
+
+            .about-content p {
+                font-size: 14px;
+
+                line-height: 1.8;
+            }
+
+            .about-info {
+                display: flex;
+
+                flex-direction: column;
+
+                gap: 9px;
+            }
+
+            .info-item {
+                width: 100%;
+
+                font-size: 13px;
+            }
+
+            .about-btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    {% include 'common/header.html' %}
+
+
+    <!-- ==============================
+         ABOUT SECTION
+    =============================== -->
+
+    <section class="about-section">
+
+        <div class="about-container">
+
+
+            <!-- Profile Image -->
+
+            <div class="about-image">
+
+                <div class="image-frame">
+
+                    <img src="{% static 'image/SRIJAL.jpg' %}" alt="Srijal Tiwari">
+
+                    <span class="image-dot"></span>
+
+                </div>
+
+            </div>
+
+
+            <!-- About Content -->
+
+            <div class="about-content">
+
+                <span class="about-tag">
+                    Get to Know Me
+                </span>
+
+
+                <h1>
+                    About <span>Me</span>
+                </h1>
+
+
+                <p>
+                    Welcome to my portfolio. I am Srijal Tiwari,
+                    I am BCA student and aspiring Python & Django Developer.
+                </p>
+
+
+                <p>
+                    I am interested in web development and enjoy creating
+                    websites and web applications using Python, Django,
+                    HTML, CSS and databases.
+                </p>
+
+
+                <p>
+                    I am continuously learning new technologies and
+                    improving my programming and problem-solving skills
+                    through practical projects.
+                </p>
+
+
+                <p>
+                    My goal is to become a skilled software developer
+                    and build useful, simple and user-friendly
+                    web applications.
+                </p>
+
+
+                <!-- Basic Information -->
+
+                <div class="about-info">
+
+                    <div class="info-item">
+
+                        <strong>
+                            Education
+                        </strong>
+
+                        BCA
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <strong>
+                            Role
+                        </strong>
+
+                        Python & Django Developer
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <strong>
+                            Location
+                        </strong>
+
+                        India
+
+                    </div>
+
+                </div>
+
+
+                <a href="/contact_us" class="about-btn">
+                    Contact Me
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>
