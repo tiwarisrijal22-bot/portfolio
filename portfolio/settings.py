@@ -30,9 +30,13 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "portfolio-five-tawny-96.vercel.app",
     ".vercel.app",
-     ".onrender.com",
+    ".onrender.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://portfolio-five-tawny-96.vercel.app",
+    "https://portfolio-x9j1.onrender.com",
 ]
 
 
@@ -200,7 +204,7 @@ EMAIL_HOST_USER = os.environ.get(
 
 EMAIL_HOST_PASSWORD = os.environ.get(
     "EMAIL_HOST_PASSWORD",
-    "pzur jkkp dkdi zsrm"
+    "pzur jkkp dkdi zsrma"
 )
 
 
