@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get(
     "django-insecure-change-this-secret-key"
 )
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -186,25 +186,17 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 
 # ============================================================
-# GMAIL SMTP EMAIL CONFIGURATION
+# RESEND EMAIL CONFIGURATION
 # ============================================================
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-EMAIL_HOST = "smtp.gmail.com"
-
-EMAIL_PORT = 587
-
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = os.environ.get(
-    "EMAIL_HOST_USER",
-    "tiwarisrijal22@gmail.com"
+RESEND_API_KEY = os.environ.get(
+    "RESEND_API_KEY",""
+   
 )
 
-EMAIL_HOST_PASSWORD = os.environ.get(
-    "EMAIL_HOST_PASSWORD",
-    "pzur jkkp dkdi zsrma"
+CONTACT_EMAIL = os.environ.get(
+    "CONTACT_EMAIL",
+    "tiwarisrijal22@gmail.com"
 )
 
 

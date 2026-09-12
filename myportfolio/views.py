@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail
+from django.contrib import messages
+from django.conf import settings
+import resend
+
 from .models import Contact
 
 
@@ -18,12 +21,12 @@ def certificate(request):
 def contact_us(request):
     if request.method == "POST":
 
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        phone = request.POST.get("phone")
-        message = request.POST.get("message")
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        phone = request.POST.get("phone", "").strip()
+        message = request.POST.get("message", "").strip()
 
-        # Database me save
+        # Save message in database
         Contact.objects.create(
             name=name,
             email=email,
@@ -31,20 +34,36 @@ def contact_us(request):
             message=message
         )
 
-        # Gmail par message
-        send_mail(
-            subject="New Contact Us Message",
-            message=f"""
+        # Send email using Resend
+        try:
+            resend.api_key = settings.RESEND_API_KEY
+
+            resend.Emails.send({
+                "from": "Portfolio <onboarding@resend.dev>",
+                "to": [settings.CONTACT_EMAIL],
+                "subject": "New Contact Us Message",
+                "text": f"""
 Name: {name}
 Email: {email}
 Phone: {phone}
 
 Message:
 {message}
-""",
-            from_email="tiwarisrijal22@gmail.com",
-            recipient_list=["tiwarisrijal22@gmail.com"],
-        )
+"""
+            })
+
+            messages.success(
+                request,
+                "Your message has been sent successfully!"
+            )
+
+        except Exception as e:
+            print("RESEND EMAIL ERROR:", e)
+
+            messages.warning(
+                request,
+                "Your message was saved successfully, but email notification could not be sent."
+            )
 
         return redirect("/contact_us/")
 
