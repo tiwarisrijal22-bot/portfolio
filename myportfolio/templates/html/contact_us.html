@@ -1,14 +1,12 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Contact | Portfolio</title>
 
     {% include 'common/common_css.html' %}
@@ -26,8 +24,8 @@
         }
 
         /* ================================
-           CONTACT SECTION
-        ================================= */
+       CONTACT SECTION
+    ================================= */
 
         .contact-section {
             min-height: 88vh;
@@ -40,8 +38,8 @@
         }
 
         /* ================================
-           BACKGROUND FLOATING SHAPES
-        ================================= */
+       BACKGROUND FLOATING SHAPES
+    ================================= */
 
         .shape {
             position: absolute;
@@ -85,12 +83,7 @@
             animation-delay: 2s;
         }
 
-        /* ================================
-           FLOATING ANIMATION
-        ================================= */
-
         @keyframes floating {
-
             0% {
                 transform: translate(0, 0) scale(1);
             }
@@ -110,12 +103,81 @@
             100% {
                 transform: translate(0, 0) scale(1);
             }
-
         }
 
         /* ================================
-           MAIN CONTACT CARD
-        ================================= */
+       SUCCESS NOTIFICATION
+    ================================= */
+
+        .notification-container {
+            position: fixed;
+            top: 85px;
+            right: 25px;
+            z-index: 99999;
+        }
+
+        .success-notification {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 330px;
+            max-width: 430px;
+            padding: 16px 18px;
+            background: #ffffff;
+            color: #1f2937;
+            border-left: 5px solid #22c55e;
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
+            font-size: 14px;
+            font-weight: 600;
+
+            animation: notificationSlide 0.45s ease;
+            transition: all 0.4s ease;
+        }
+
+        .notification-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dcfce7;
+            color: #16a34a;
+            border-radius: 50%;
+            font-size: 17px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .success-notification button {
+            margin-left: auto;
+            border: none;
+            background: transparent;
+            color: #9ca3af;
+            font-size: 23px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .success-notification button:hover {
+            color: #374151;
+        }
+
+        @keyframes notificationSlide {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ================================
+       MAIN CONTACT CARD
+    ================================= */
 
         .contact-box {
             width: 100%;
@@ -135,8 +197,8 @@
         }
 
         /* ================================
-           HEADING
-        ================================= */
+       HEADING
+    ================================= */
 
         .contact-heading {
             text-align: center;
@@ -175,8 +237,8 @@
         }
 
         /* ================================
-           FORM
-        ================================= */
+       FORM
+    ================================= */
 
         .form-group {
             margin-bottom: 22px;
@@ -238,10 +300,6 @@
                 0 0 0 4px rgba(99, 102, 241, 0.10);
         }
 
-        /* ================================
-           MESSAGE LABEL
-        ================================= */
-
         .message-label {
             display: flex !important;
             align-items: center;
@@ -249,8 +307,8 @@
         }
 
         /* ================================
-           SUBMIT BUTTON
-        ================================= */
+       SUBMIT BUTTON
+    ================================= */
 
         .submit-btn {
             width: 100%;
@@ -268,6 +326,7 @@
             font-weight: 700;
             letter-spacing: 0.3px;
             cursor: pointer;
+
             transition: all 0.3s ease;
 
             box-shadow:
@@ -286,8 +345,8 @@
         }
 
         /* ================================
-           BOTTOM TEXT
-        ================================= */
+       BOTTOM TEXT
+    ================================= */
 
         .contact-note {
             text-align: center;
@@ -297,8 +356,8 @@
         }
 
         /* ================================
-           RESPONSIVE
-        ================================= */
+       RESPONSIVE
+    ================================= */
 
         @media (max-width: 600px) {
 
@@ -332,11 +391,22 @@
                 width: 180px;
                 height: 180px;
             }
+
+            .notification-container {
+                top: 75px;
+                left: 15px;
+                right: 15px;
+            }
+
+            .success-notification {
+                min-width: auto;
+                width: 100%;
+            }
         }
 
         /* ================================
-           REDUCE MOTION
-        ================================= */
+       REDUCE MOTION
+    ================================= */
 
         @media (prefers-reduced-motion: reduce) {
 
@@ -344,24 +414,56 @@
                 animation: none;
             }
 
-            .submit-btn {
+            .submit-btn,
+            .success-notification {
                 transition: none;
             }
-
         }
     </style>
+    ```
 
 </head>
 
-
 <body>
 
+    ```
     {% include 'common/header.html' %}
 
 
     <!-- ================================
-         CONTACT SECTION
-    ================================= -->
+     SUCCESS NOTIFICATION
+================================= -->
+
+    {% if messages %}
+    <div class="notification-container">
+
+        {% for message in messages %}
+
+        <div class="success-notification">
+
+            <span class="notification-icon">
+                ✓
+            </span>
+
+            <span>
+                {{ message }}
+            </span>
+
+            <button type="button" onclick="this.parentElement.remove()">
+                ×
+            </button>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+    {% endif %}
+
+
+    <!-- ================================
+     CONTACT SECTION
+================================= -->
 
     <section class="contact-section">
 
@@ -489,7 +591,9 @@
                 <!-- Submit -->
 
                 <button type="submit" class="submit-btn">
+
                     Send Message &nbsp; →
+
                 </button>
 
 
@@ -507,6 +611,35 @@
 
 
     {% include 'common/footer.html' %}
+
+
+    <!-- ================================
+     AUTO HIDE NOTIFICATION
+================================= -->
+
+    <script>
+
+        setTimeout(function () {
+
+            const notification =
+                document.querySelector(".success-notification");
+
+            if (notification) {
+
+                notification.style.opacity = "0";
+                notification.style.transform =
+                    "translateX(50px)";
+
+                setTimeout(function () {
+                    notification.remove();
+                }, 400);
+
+            }
+
+        }, 4000);
+
+    </script>
+    
 
 </body>
 

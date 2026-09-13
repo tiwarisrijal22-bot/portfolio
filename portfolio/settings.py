@@ -195,11 +195,23 @@ MEDIA_ROOT = BASE_DIR / "media"
 # ============================================================
 # RESEND EMAIL CONFIGURATION
 # ============================================================
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-RESEND_API_KEY = os.environ.get(
-    "RESEND_API_KEY",
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.environ.get(
+    "EMAIL_HOST_USER",
+    "tiwarisrijal22@gmail.com",
+)
+
+EMAIL_HOST_PASSWORD = os.environ.get(
+    "EMAIL_HOST_PASSWORD",
     "",
 )
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CONTACT_EMAIL = os.environ.get(
     "CONTACT_EMAIL",

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
-import resend
+from django.core.mail import send_mail
 
 from .models import Contact
 
@@ -26,31 +26,29 @@ def contact_us(request):
         phone = request.POST.get("phone", "").strip()
         message = request.POST.get("message", "").strip()
 
-        # Save message in database
-        Contact.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            message=message
-        )
-
-        # Send email using Resend
         try:
-            resend.api_key = settings.RESEND_API_KEY
+            # Save contact message
+            Contact.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                message=message
+            )
 
-            resend.Emails.send({
-                "from": "Portfolio <onboarding@resend.dev>",
-                "to": [settings.CONTACT_EMAIL],
-                "subject": "New Contact Us Message",
-                "text": f"""
-Name: {name}
-Email: {email}
-Phone: {phone}
-
-Message:
-{message}
-"""
-            })
+            # Send email
+            send_mail(
+                subject=f"New Portfolio Message from {name}",
+                message=(
+                    "New message received from your portfolio.\n\n"
+                    f"Name: {name}\n"
+                    f"Email: {email}\n"
+                    f"Phone: {phone}\n\n"
+                    f"Message:\n{message}"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.CONTACT_EMAIL],
+                fail_silently=False,
+            )
 
             messages.success(
                 request,
@@ -58,13 +56,13 @@ Message:
             )
 
         except Exception as e:
-            print("RESEND EMAIL ERROR:", e)
+            print("CONTACT EMAIL ERROR:", repr(e))
 
-            messages.warning(
+            messages.error(
                 request,
-                "Your message was saved successfully, but email notification could not be sent."
+                "Something went wrong while sending your message."
             )
 
-        return redirect("/contact_us/")
+        return redirect("contact_us")
 
     return render(request, "html/contact_us.html")
