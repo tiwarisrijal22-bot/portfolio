@@ -4,7 +4,6 @@ Django settings for portfolio project.
 
 from pathlib import Path
 import os
-
 from dotenv import load_dotenv
 
 
@@ -13,7 +12,6 @@ from dotenv import load_dotenv
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 load_dotenv(BASE_DIR / ".env")
 
 
@@ -112,10 +110,12 @@ WSGI_APPLICATION = "portfolio.wsgi.application"
 # DATABASE
 # ============================================================
 
+# Render's deployed filesystem is not suitable for writing
+# to the project directory, so use the writable /tmp directory.
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": "/tmp/db.sqlite3",
     }
 }
 
@@ -157,11 +157,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # ============================================================
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -170,7 +168,6 @@ USE_TZ = True
 # ============================================================
 
 STATIC_URL = "/static/"
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
@@ -188,13 +185,13 @@ STORAGES = {
 # ============================================================
 
 MEDIA_URL = "/media/"
-
 MEDIA_ROOT = BASE_DIR / "media"
 
 
 # ============================================================
-# RESEND EMAIL CONFIGURATION
+# EMAIL CONFIGURATION
 # ============================================================
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 EMAIL_HOST = "smtp.gmail.com"
