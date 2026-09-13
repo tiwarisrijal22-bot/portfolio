@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import send_mail
-
 from .models import Contact
+import requests
 
 
 def home(request):
@@ -27,7 +26,7 @@ def contact_us(request):
         message = request.POST.get("message", "").strip()
 
         try:
-            # Save contact message
+            # Save contact message to database
             Contact.objects.create(
                 name=name,
                 email=email,
@@ -35,34 +34,60 @@ def contact_us(request):
                 message=message
             )
 
-            # Send email
-            send_mail(
-                subject=f"New Portfolio Message from {name}",
-                message=(
+            # Send email using Resend API
+            resend_api_key = settings.RESEND_API_KEY
+
+            if not resend_api_key:
+                messages.success(
+                    request,
+                    "Your message has been saved successfully!"
+                )
+                return redirect("contact_us")
+
+            email_data = {
+                "from": "Portfolio <onboarding@resend.dev>",
+                "to": [settings.CONTACT_EMAIL],
+                "subject": f"New Portfolio Message from {name}",
+                "text": (
                     "New message received from your portfolio.\n\n"
                     f"Name: {name}\n"
                     f"Email: {email}\n"
                     f"Phone: {phone}\n\n"
                     f"Message:\n{message}"
                 ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL],
-                fail_silently=False,
+            }
+
+            response = requests.post(
+                "https://api.resend.com/emails",
+                headers={
+                    "Authorization": f"Bearer {resend_api_key}",
+                    "Content-Type": "application/json",
+                },
+                json=email_data,
+                timeout=10,
             )
 
-            messages.success(
-                request,
-                "Your message has been sent successfully!"
-            )
+            if response.status_code in (200, 201):
+                messages.success(
+                    request,
+                    "Your message has been sent successfully!"
+                )
+            else:
+                print("RESEND ERROR:", response.status_code, response.text)
+
+                # DB save successful even if email fails
+                messages.success(
+                    request,
+                    "Your message has been saved successfully!"
+                )
 
         except Exception as e:
-            # Print exact error in Render/Vercel logs
-            print("CONTACT EMAIL ERROR:", repr(e))
+            print("CONTACT ERROR:", repr(e))
 
-            # Temporarily show exact error on website
-            messages.error(
+            # Contact is already saved if this happens after create()
+            messages.success(
                 request,
-                f"Email Error: {e}"
+                "Your message has been saved successfully!"
             )
 
         return redirect("contact_us")
