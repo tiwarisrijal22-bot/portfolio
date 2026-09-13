@@ -111,14 +111,14 @@ WSGI_APPLICATION = "portfolio.wsgi.application"
 # ============================================================
 
 # Render's deployed filesystem is not suitable for writing
-# to the project directory, so use the writable /tmp directory.
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "/tmp/db.sqlite3",
+        "NAME": "/tmp/db.sqlite3"
+        if os.environ.get("RENDER")
+        else BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # ============================================================
 # PASSWORD VALIDATION
