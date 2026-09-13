@@ -56,11 +56,13 @@ def contact_us(request):
             )
 
         except Exception as e:
+            # Print exact error in Render/Vercel logs
             print("CONTACT EMAIL ERROR:", repr(e))
 
+            # Temporarily show exact error on website
             messages.error(
                 request,
-                "Something went wrong while sending your message."
+                f"Email Error: {e}"
             )
 
         return redirect("contact_us")
