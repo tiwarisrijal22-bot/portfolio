@@ -1,12 +1,12 @@
 {% load static %}
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Contact | Portfolio</title>
 
     {% include 'common/common_css.html' %}
@@ -24,8 +24,8 @@
         }
 
         /* ================================
-       CONTACT SECTION
-    ================================= */
+           CONTACT SECTION
+        ================================= */
 
         .contact-section {
             min-height: 88vh;
@@ -38,8 +38,8 @@
         }
 
         /* ================================
-       BACKGROUND FLOATING SHAPES
-    ================================= */
+           BACKGROUND FLOATING SHAPES
+        ================================= */
 
         .shape {
             position: absolute;
@@ -106,8 +106,8 @@
         }
 
         /* ================================
-       SUCCESS NOTIFICATION
-    ================================= */
+           SUCCESS NOTIFICATION
+        ================================= */
 
         .notification-container {
             position: fixed;
@@ -130,7 +130,6 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
             font-size: 14px;
             font-weight: 600;
-
             animation: notificationSlide 0.45s ease;
             transition: all 0.4s ease;
         }
@@ -176,8 +175,8 @@
         }
 
         /* ================================
-       MAIN CONTACT CARD
-    ================================= */
+           MAIN CONTACT CARD
+        ================================= */
 
         .contact-box {
             width: 100%;
@@ -197,8 +196,8 @@
         }
 
         /* ================================
-       HEADING
-    ================================= */
+           HEADING
+        ================================= */
 
         .contact-heading {
             text-align: center;
@@ -237,8 +236,8 @@
         }
 
         /* ================================
-       FORM
-    ================================= */
+           FORM
+        ================================= */
 
         .form-group {
             margin-bottom: 22px;
@@ -307,8 +306,8 @@
         }
 
         /* ================================
-       SUBMIT BUTTON
-    ================================= */
+           SUBMIT BUTTON
+        ================================= */
 
         .submit-btn {
             width: 100%;
@@ -326,7 +325,6 @@
             font-weight: 700;
             letter-spacing: 0.3px;
             cursor: pointer;
-
             transition: all 0.3s ease;
 
             box-shadow:
@@ -345,8 +343,8 @@
         }
 
         /* ================================
-       BOTTOM TEXT
-    ================================= */
+           BOTTOM TEXT
+        ================================= */
 
         .contact-note {
             text-align: center;
@@ -356,8 +354,8 @@
         }
 
         /* ================================
-       RESPONSIVE
-    ================================= */
+           RESPONSIVE
+        ================================= */
 
         @media (max-width: 600px) {
 
@@ -405,8 +403,8 @@
         }
 
         /* ================================
-       REDUCE MOTION
-    ================================= */
+           REDUCE MOTION
+        ================================= */
 
         @media (prefers-reduced-motion: reduce) {
 
@@ -420,21 +418,18 @@
             }
         }
     </style>
-    ```
-
 </head>
 
 <body>
 
-    ```
+    <!-- MAIN HEADER - KEEP THIS -->
     {% include 'common/header.html' %}
 
 
-    <!-- ================================
-     SUCCESS NOTIFICATION
-================================= -->
+    <!-- SUCCESS NOTIFICATION -->
 
     {% if messages %}
+
     <div class="notification-container">
 
         {% for message in messages %}
@@ -458,12 +453,11 @@
         {% endfor %}
 
     </div>
+
     {% endif %}
 
 
-    <!-- ================================
-     CONTACT SECTION
-================================= -->
+    <!-- CONTACT SECTION -->
 
     <section class="contact-section">
 
@@ -477,7 +471,6 @@
         <!-- Main Contact Card -->
 
         <div class="contact-box">
-
 
             <!-- Heading -->
 
@@ -600,7 +593,9 @@
                 <!-- Bottom Text -->
 
                 <div class="contact-note">
+
                     I usually respond as soon as possible.
+
                 </div>
 
             </form>
@@ -610,12 +605,12 @@
     </section>
 
 
+    <!-- FOOTER -->
+
     {% include 'common/footer.html' %}
 
 
-    <!-- ================================
-     AUTO HIDE NOTIFICATION
-================================= -->
+    <!-- AUTO HIDE NOTIFICATION -->
 
     <script>
 
@@ -627,11 +622,14 @@
             if (notification) {
 
                 notification.style.opacity = "0";
+
                 notification.style.transform =
                     "translateX(50px)";
 
                 setTimeout(function () {
+
                     notification.remove();
+
                 }, 400);
 
             }
@@ -639,7 +637,6 @@
         }, 4000);
 
     </script>
-    
 
 </body>
 
