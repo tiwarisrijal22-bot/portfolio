@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 load_dotenv(BASE_DIR / ".env")
 
 
@@ -110,15 +111,13 @@ WSGI_APPLICATION = "portfolio.wsgi.application"
 # DATABASE
 # ============================================================
 
-# Render's deployed filesystem is not suitable for writing
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "/tmp/db.sqlite3"
-        if os.environ.get("RENDER")
-        else BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
 
 # ============================================================
 # PASSWORD VALIDATION
@@ -157,9 +156,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # ============================================================
 
 LANGUAGE_CODE = "en-us"
+
 TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
+
 USE_TZ = True
 
 
@@ -168,6 +169,7 @@ USE_TZ = True
 # ============================================================
 
 STATIC_URL = "/static/"
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
@@ -185,17 +187,22 @@ STORAGES = {
 # ============================================================
 
 MEDIA_URL = "/media/"
+
 MEDIA_ROOT = BASE_DIR / "media"
 
 
 # ============================================================
-# EMAIL CONFIGURATION
+# EMAIL CONFIGURATION - GMAIL
 # ============================================================
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
 EMAIL_HOST = "smtp.gmail.com"
+
 EMAIL_PORT = 587
+
 EMAIL_USE_TLS = True
+
 EMAIL_TIMEOUT = 10
 
 EMAIL_HOST_USER = os.environ.get(
@@ -210,16 +217,12 @@ EMAIL_HOST_PASSWORD = os.environ.get(
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# ============================================================
-# EMAIL CONFIGURATION
-# ============================================================
-
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
-
 CONTACT_EMAIL = os.environ.get(
     "CONTACT_EMAIL",
     "tiwarisrijal22@gmail.com",
 )
+
+
 # ============================================================
 # DEFAULT PRIMARY KEY
 # ============================================================
