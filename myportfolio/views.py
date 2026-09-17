@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
 from .models import Contact
 
 
@@ -17,10 +19,15 @@ def certificate(request):
 
 def contact_us(request):
     if request.method == "POST":
+
         name = request.POST.get("name", "").strip()
         email = request.POST.get("email", "").strip()
         phone = request.POST.get("phone", "").strip()
         message = request.POST.get("message", "").strip()
+
+        # =====================================================
+        # SAVE MESSAGE TO DATABASE
+        # =====================================================
 
         try:
             Contact.objects.create(
@@ -30,17 +37,63 @@ def contact_us(request):
                 message=message,
             )
 
+            database_saved = True
+
+        except Exception as e:
+            print("DATABASE ERROR:", repr(e))
+            database_saved = False
+
+        # =====================================================
+        # SEND EMAIL
+        # =====================================================
+
+        try:
+            send_mail(
+                subject=f"New Portfolio Message from {name}",
+                message=(
+                    "New message received from your portfolio.\n\n"
+                    f"Name: {name}\n"
+                    f"Email: {email}\n"
+                    f"Phone: {phone}\n\n"
+                    f"Message:\n{message}"
+                ),
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[settings.CONTACT_EMAIL],
+                fail_silently=False,
+            )
+
+            email_sent = True
+
+        except Exception as e:
+            print("EMAIL ERROR:", repr(e))
+            email_sent = False
+
+        # =====================================================
+        # FINAL MESSAGE
+        # =====================================================
+
+        if database_saved and email_sent:
+            messages.success(
+                request,
+                "Your message has been sent successfully!"
+            )
+
+        elif email_sent:
+            messages.success(
+                request,
+                "Your message has been sent successfully!"
+            )
+
+        elif database_saved:
             messages.success(
                 request,
                 "Your message has been saved successfully!"
             )
 
-        except Exception as e:
-            print("CONTACT DB ERROR:", repr(e))
-
+        else:
             messages.error(
                 request,
-                "Unable to save your message."
+                "Unable to send your message. Please try again."
             )
 
         return redirect("contact_us")
