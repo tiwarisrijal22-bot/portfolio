@@ -17,7 +17,7 @@ def certificate(request):
     return render(request, "html/certificate.html")
 
 
-def contact_us(request):
+def contact(request):
     if request.method == "POST":
 
         name = request.POST.get("name", "").strip()
@@ -25,77 +25,39 @@ def contact_us(request):
         phone = request.POST.get("phone", "").strip()
         message = request.POST.get("message", "").strip()
 
-        # =====================================================
-        # SAVE MESSAGE TO DATABASE
-        # =====================================================
+        # Save message in database
+        Contact.objects.create(
+            name=name,
+            email=email,
+            message=message
+        )
 
-        try:
-            Contact.objects.create(
-                name=name,
-                email=email,
-                phone=phone,
-                message=message,
-            )
-
-            database_saved = True
-
-        except Exception as e:
-            print("DATABASE ERROR:", repr(e))
-            database_saved = False
-
-        # =====================================================
-        # SEND EMAIL
-        # =====================================================
-
+        # Send email
         try:
             send_mail(
-                subject=f"New Portfolio Message from {name}",
-                message=(
-                    "New message received from your portfolio.\n\n"
-                    f"Name: {name}\n"
-                    f"Email: {email}\n"
-                    f"Phone: {phone}\n\n"
-                    f"Message:\n{message}"
-                ),
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[settings.CONTACT_EMAIL],
+                "Portfolio Contact Message",
+                f"Name: {name}\n"
+                f"Email: {email}\n"
+                f"Phone: {phone}\n\n"
+                f"Message:\n{message}",
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_EMAIL],
                 fail_silently=False,
             )
 
-            email_sent = True
+            messages.success(
+                request,
+                "Your message has been sent successfully!"
+            )
 
         except Exception as e:
-            print("EMAIL ERROR:", repr(e))
-            email_sent = False
+            print("EMAIL ERROR:", e)
 
-        # =====================================================
-        # FINAL MESSAGE
-        # =====================================================
-
-        if database_saved and email_sent:
-            messages.success(
-                request,
-                "Your message has been sent successfully!"
-            )
-
-        elif email_sent:
-            messages.success(
-                request,
-                "Your message has been sent successfully!"
-            )
-
-        elif database_saved:
-            messages.success(
-                request,
-                "Your message has been saved successfully!"
-            )
-
-        else:
             messages.error(
                 request,
-                "Unable to send your message. Please try again."
+                "Message could not be sent. Please try again."
             )
 
-        return redirect("contact_us")
+        return redirect("home")
 
     return render(request, "html/contact_us.html")
