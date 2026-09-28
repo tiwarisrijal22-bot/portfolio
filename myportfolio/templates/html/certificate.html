@@ -69,12 +69,8 @@
         .certificate-container {
             max-width: 1100px;
             margin: auto;
-
             display: grid;
-
-            /* 3 cards in one line */
             grid-template-columns: repeat(3, 1fr);
-
             gap: 30px;
         }
 
@@ -82,20 +78,15 @@
 
         .certificate-card {
             background: #ffffff;
-
             border: 1px solid #e5eaf0;
             border-radius: 10px;
-
             overflow: hidden;
-
             box-shadow: 0 10px 30px rgba(31, 41, 55, 0.06);
-
             transition: 0.25s ease;
         }
 
         .certificate-card:hover {
             transform: translateY(-5px);
-
             box-shadow: 0 15px 35px rgba(31, 41, 55, 0.12);
         }
 
@@ -104,22 +95,17 @@
         .certificate-image {
             width: 100%;
             height: 210px;
-
             background: #edf3f9;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             overflow: hidden;
         }
 
         .certificate-image img {
             width: 100%;
             height: 100%;
-
             object-fit: cover;
-
             transition: 0.3s ease;
         }
 
@@ -157,20 +143,14 @@
 
         .view-btn {
             display: inline-block;
-
             padding: 10px 18px;
-
             background: #315b87;
             color: #ffffff;
-
             border: 1px solid #315b87;
             border-radius: 6px;
-
             text-decoration: none;
-
             font-size: 14px;
             font-weight: 600;
-
             transition: 0.25s ease;
         }
 
@@ -178,18 +158,15 @@
             background: #24496f;
             border-color: #24496f;
             color: #ffffff;
-
             transform: translateY(-2px);
         }
 
         /* Responsive */
 
         @media (max-width: 900px) {
-
             .certificate-container {
                 grid-template-columns: repeat(2, 1fr);
             }
-
         }
 
         @media (max-width: 600px) {
@@ -209,17 +186,14 @@
             .certificate-image {
                 height: 210px;
             }
-
         }
     </style>
 
 </head>
 
-
 <body>
 
     {% include 'common/header.html' %}
-
 
     <!-- Certificates Section -->
 
@@ -245,7 +219,45 @@
         <div class="certificate-container">
 
 
-            <!-- Certificate 1 -->
+            <!-- Certificate 1 - Precursor -->
+
+            <div class="certificate-card">
+
+                <div class="certificate-image">
+
+                    <img src="{% static 'image/precursor.png' %}" alt="Precursor Summer Internship Certificate">
+
+                </div>
+
+                <div class="certificate-content">
+
+                    <h2>
+                        Precursor Summer Internship
+                    </h2>
+
+                    <div class="issuer">
+                        Precursor
+                    </div>
+
+                    <p>
+                        Successfully completed the Precursor Summer
+                        Internship and gained practical knowledge in
+                        Python, Django and full-stack web development
+                        through hands-on learning and project work.
+                    </p>
+
+                    <a href="{% static 'image/precursor.png' %}" target="_blank" class="view-btn">
+
+                        View Certificate
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Certificate 2 -->
 
             <div class="certificate-card">
 
@@ -282,7 +294,7 @@
             </div>
 
 
-            <!-- Certificate 2 -->
+            <!-- Certificate 3 -->
 
             <div class="certificate-card">
 
@@ -319,7 +331,7 @@
             </div>
 
 
-            <!-- Certificate 3 -->
+            <!-- Certificate 4 -->
 
             <div class="certificate-card">
 
@@ -356,13 +368,13 @@
             </div>
 
 
-            <!-- IBM Certificate -->
+            <!-- Certificate 5 - IBM AI -->
 
             <div class="certificate-card">
 
                 <div class="certificate-image">
 
-                    <img src="{% static 'image/ibm.png' %}" alt="IBM SkillsBuild Certificate">
+                    <img src="{% static 'image/ibm.png' %}" alt="IBM SkillsBuild Artificial Intelligence Certificate">
 
                 </div>
 
@@ -390,68 +402,86 @@
                     </a>
 
                 </div>
+
             </div>
-<!-- IBM Certificate -->
 
-<div class="certificate-card">
 
-    <div class="certificate-image">
+            <!-- Certificate 6 - IBM Cybersecurity -->
 
-        <img src="{% static 'image/cyber.png' %}" alt="IBM SkillsBuild Certificate">
+            <div class="certificate-card">
 
-    </div>
+                <div class="certificate-image">
 
-    <div class="certificate-content">
-        <h2>
-           cybersecurity
-        </h2>
+                    <img src="{% static 'image/cyber.png' %}" alt="IBM SkillsBuild Cybersecurity Certificate">
 
-        <div class="issuer">
-            IBM SkillsBuild
-        </div>
+                </div>
 
-        <p>
-            Successfully completed IBM SkillsBuild training in Cybersecurity, covering fundamental security concepts, cyber threats,
-            and digital safety practices.
-        </p>
+                <div class="certificate-content">
 
-        <a href="{% static 'image/cyber.png' %}" target="_blank" class="view-btn">
+                    <h2>
+                        Cybersecurity
+                    </h2>
 
-            View Certificate
+                    <div class="issuer">
+                        IBM SkillsBuild
+                    </div>
 
-        </a>
+                    <p>
+                        Successfully completed IBM SkillsBuild
+                        training in Cybersecurity, covering
+                        fundamental security concepts, cyber threats,
+                        and digital safety practices.
+                    </p>
 
-    </div>
-</div>
-<div class="certificate-card">
+                    <a href="{% static 'image/cyber.png' %}" target="_blank" class="view-btn">
 
-    <div class="certificate-image">
+                        View Certificate
 
-        <img src="{% static 'image/bob.png' %}" alt="IBM SkillsBuild Certificate">
+                    </a>
 
-    </div>
+                </div>
 
-    <div class="certificate-content">
-        <h2>
-            cybersecurity
-        </h2>
+            </div>
 
-        <div class="issuer">
-            IBM SkillsBuild
-        </div>
 
-        <p>
-            Successfully completed IBM SkillsBuild training on troubleshooting and debugging code using IBM Bob with AI-assisted
-            coding techniques.
-        </p>
+            <!-- Certificate 7 - IBM Bob -->
 
-        <a href="{% static 'image/bob.png' %}" target="_blank" class="view-btn">
+            <div class="certificate-card">
 
-            View Certificate
+                <div class="certificate-image">
 
-        </a>
+                    <img src="{% static 'image/bob.png' %}" alt="IBM Bob AI-Assisted Coding Certificate">
 
-    </div>
+                </div>
+
+                <div class="certificate-content">
+
+                    <h2>
+                        AI-Assisted Coding
+                    </h2>
+
+                    <div class="issuer">
+                        IBM SkillsBuild
+                    </div>
+
+                    <p>
+                        Successfully completed IBM SkillsBuild
+                        training on troubleshooting and debugging
+                        code using IBM Bob with AI-assisted
+                        coding techniques.
+                    </p>
+
+                    <a href="{% static 'image/bob.png' %}" target="_blank" class="view-btn">
+
+                        View Certificate
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
         </div>
 
     </section>
