@@ -2,20 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
-
-
 def home(request):
     return render(request, "html/index.html")
-
-
 def about_us(request):
     return render(request, "html/about_us.html")
-
-
 def certificate(request):
     return render(request, "html/certificate.html")
-
-
 def contact(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
@@ -24,9 +16,11 @@ def contact(request):
         message = request.POST.get("message", "").strip()
 
         if not name or not email or not message:
-            messages.error(request, "Please fill in all required fields.")
-            return redirect("contact")
-
+            messages.error(
+                request,
+                "Please fill in all required fields."
+            )
+            return redirect("contact_us")
         try:
             send_mail(
                 "Portfolio Contact Message",
@@ -38,17 +32,18 @@ def contact(request):
                 [settings.CONTACT_EMAIL],
                 fail_silently=False,
             )
-
             messages.success(
-                request, "Your message has been sent successfully!"
+                request,
+                "Your message has been sent successfully!"
             )
 
         except Exception as e:
             print("EMAIL ERROR:", e)
             messages.error(
-                request, "Message could not be sent. Please try again."
+                request,
+                "Message could not be sent. Please try again."
             )
 
-        return redirect("home")
+        return redirect("contact_us")
 
     return render(request, "html/contact_us.html")
