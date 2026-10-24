@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
-from .models import Contact
 
 
 def home(request):
@@ -19,20 +18,15 @@ def certificate(request):
 
 def contact(request):
     if request.method == "POST":
-
         name = request.POST.get("name", "").strip()
         email = request.POST.get("email", "").strip()
         phone = request.POST.get("phone", "").strip()
         message = request.POST.get("message", "").strip()
 
-        # Save message in database
-        Contact.objects.create(
-            name=name,
-            email=email,
-            message=message
-        )
+        if not name or not email or not message:
+            messages.error(request, "Please fill in all required fields.")
+            return redirect("contact")
 
-        # Send email
         try:
             send_mail(
                 "Portfolio Contact Message",
@@ -46,16 +40,13 @@ def contact(request):
             )
 
             messages.success(
-                request,
-                "Your message has been sent successfully!"
+                request, "Your message has been sent successfully!"
             )
 
         except Exception as e:
             print("EMAIL ERROR:", e)
-
             messages.error(
-                request,
-                "Message could not be sent. Please try again."
+                request, "Message could not be sent. Please try again."
             )
 
         return redirect("home")
